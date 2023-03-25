@@ -10,6 +10,9 @@ high_score = 0
 level = 1
 k_point = setting.killing_point
 refresh_interval = setting.alien_refresh_interval
+pygame.mixer.init()
+pygame.mixer.music.load('music/maou_loop_bgm_cyber33.ogg')
+pygame.mixer.music.set_volume(0.5)
 # 初始化单位
 ship = pygame.sprite.Sprite()
 bullets = pygame.sprite.Group()
@@ -64,6 +67,7 @@ def game_restart():
     aliens.empty()
     bullets.empty()
     restart_ship()
+    pygame.mixer.music.play(-1)
 
 def shot():
     new_bullet = pygame.sprite.Sprite()
@@ -110,7 +114,7 @@ def add_alien():
     new_alien.rect.midbottom = (pos, 0)
     aliens.add(new_alien)
 
-
+pygame.mixer.music.play(-1)
 # 程序循环
 while True:
     clock.tick(60)
@@ -191,6 +195,7 @@ while True:
                 pygame.draw.rect(screen_image, setting.red, button_rect)
                 screen_image.blit(text_image, text_rect)
                 pygame.mouse.set_visible(True)
+                pygame.mixer.music.pause()
         pygame.display.flip()
 
 
